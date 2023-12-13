@@ -53,7 +53,17 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+$env = 'development';
+switch ($_SERVER ['SERVER_NAME']) {
+    case 'dev.lnwmon.itchaiyaphum.com' :
+        $env = 'development';
+        error_reporting ( E_ALL );
+        ini_set ( 'display_errors', 'on' );
+        break;
+    default :
+        $env = 'production';
+}
+define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : $env);
 
 /*
  *---------------------------------------------------------------
